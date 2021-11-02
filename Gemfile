@@ -2,9 +2,11 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in plus_pay.gemspec
+# Specify your gem's dependencies in fami_pay.gemspec
 gemspec
 
 gem "rake", "~> 13.0"
 
 gem "rspec", "~> 3.0"
+
+gem "faraday"

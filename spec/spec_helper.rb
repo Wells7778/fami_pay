@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "plus_pay"
+require "fami_pay"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
