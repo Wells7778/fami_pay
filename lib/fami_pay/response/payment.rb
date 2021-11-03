@@ -5,12 +5,14 @@ module FamiPay
   module Response
     class Payment < Base
 
+      attr_accessor :transaction_id
+
       def trade_number
         @OrderNo
       end
 
       def trade_time
-        @OrderDT
+        parse_time @OrderDT
       end
 
       def buyer_id
@@ -22,7 +24,7 @@ module FamiPay
       end
 
       def transaction_time
-        @BankOrderDT
+        parse_time @BankOrderDT
       end
 
       def amount

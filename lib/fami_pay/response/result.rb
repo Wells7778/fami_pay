@@ -14,7 +14,7 @@ module FamiPay
       end
 
       def notify_time
-        @NotifyTime
+        parse_time @NotifyTime
       end
 
       def order_id
@@ -42,6 +42,10 @@ module FamiPay
       end
 
       private
+
+      def check_hash
+        @check_success = true
+      end
 
       def hash_data
         Digest::SHA2.hexdigest("#{transaction_data}#{secret_key}")

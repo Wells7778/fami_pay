@@ -5,6 +5,8 @@ require 'digest'
 module FamiPay
   module Response
     class Base
+      SUCCESS = 0
+      NONE = -1
 
       attr_reader :check_success
 
@@ -31,6 +33,12 @@ module FamiPay
         @params["Status"]
       end
 
+      def status_code
+        return SUCCESS if status == "S"
+        return NONE unless error_code
+        error_code
+      end
+
       def success?
         status == "S" && @check_success
       end
@@ -48,6 +56,11 @@ module FamiPay
       end
 
       private
+
+      def parse_time time_string
+        return unless time_string
+        "#{time_string[0, 4]}-#{time_string[4, 2]}-#{time_string[6, 2]} #{time_string[-6, 2]}:#{time_string[-4, 2]}:#{time_string[-2, 2]}".in_time_zone
+      end
 
       def secret_key
         @secret_key

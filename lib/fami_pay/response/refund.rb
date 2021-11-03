@@ -18,7 +18,7 @@ module FamiPay
       end
 
       def refund_time
-        @BankRefundOrderDT
+        parse_time @BankRefundOrderDT
       end
 
       def amount
