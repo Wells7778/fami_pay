@@ -35,7 +35,7 @@ module FamiPay
       private
 
       def to_hash
-        {
+        super.merge({
           Type: QRCODE_TYPE,
           OrderNo: @order_id,
           OrderCurrency: "TWD",
@@ -45,7 +45,7 @@ module FamiPay
           StoreConfirmUrl: @confirm_url,
           StoreMemo: @note,
           OnlineTrading: 1,
-        }
+        })
       end
 
       def request_type
