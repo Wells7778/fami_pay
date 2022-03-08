@@ -16,6 +16,7 @@ module FamiPay
         params.each do |key, value|
           send "#{key}=", value
         end
+        post_initialize
       end
 
       def request
@@ -25,6 +26,8 @@ module FamiPay
       end
 
       private
+
+      def post_initialize; end
 
       def to_hash
         {

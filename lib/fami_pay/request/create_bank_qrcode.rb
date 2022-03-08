@@ -1,10 +1,10 @@
 # frozen_string_literal: true
+
 require_relative "base"
 
 module FamiPay
   module Request
     class CreateBankQrcode < Base
-
       QRCODE_TYPE = 3
 
       def order_id= value_order_id
@@ -32,7 +32,15 @@ module FamiPay
         @note = value_note
       end
 
+      def for_pc!
+        @online_trading = 0
+      end
+
       private
+
+      def post_initialize
+        @online_trading = 1
+      end
 
       def to_hash
         super.merge({
@@ -44,7 +52,7 @@ module FamiPay
           StoreReturnUrl: @return_url,
           StoreConfirmUrl: @confirm_url,
           StoreMemo: @note,
-          OnlineTrading: 1,
+          OnlineTrading: @online_trading,
         })
       end
 
