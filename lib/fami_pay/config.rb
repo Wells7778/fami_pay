@@ -1,7 +1,7 @@
 module FamiPay
   class Config
-    PRODUCTION_HOST = "https://payment-uat.pluspay.com.tw/Transaction/Gateway".freeze
-    SANDBOX_HOST = "https://payment-uat.pluspay.com.tw/Transaction/Gateway".freeze
+    PRODUCTION_HOST = 'https://payment.pluspay.com.tw/Transaction/Gateway'.freeze
+    SANDBOX_HOST = 'https://payment-uat.pluspay.com.tw/Transaction/Gateway'.freeze
 
     attr_accessor :mode
     attr_accessor :secret_key
