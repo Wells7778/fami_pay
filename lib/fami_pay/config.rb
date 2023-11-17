@@ -3,9 +3,7 @@ module FamiPay
     PRODUCTION_HOST = 'https://payment.pluspay.com.tw/Transaction/Gateway'.freeze
     SANDBOX_HOST = 'https://payment-uat.pluspay.com.tw/Transaction/Gateway'.freeze
 
-    attr_accessor :mode
-    attr_accessor :secret_key
-    attr_accessor :store_id
+    attr_accessor :mode, :secret_key, :store_id, :branch_id, :branch_name
 
     def initialize
       @mode = :sandbox
@@ -19,8 +17,8 @@ module FamiPay
 
     def api_host
       return PRODUCTION_HOST if production?
+
       SANDBOX_HOST
     end
-
   end
 end

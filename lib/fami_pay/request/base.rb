@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'cgi'
 require 'faraday'
 require 'digest'
@@ -7,11 +8,11 @@ require 'json'
 module FamiPay
   module Request
     class Base
-
       attr_accessor :config
 
-      def initialize params=nil
+      def initialize(params = nil)
         return unless params.is_a? Hash
+
         @config = nil
         params.each do |key, value|
           send "#{key}=", value
@@ -20,9 +21,11 @@ module FamiPay
       end
 
       def request
-        raise FamiPay::Error, "Missing Store ID" unless config&.store_id
+        raise FamiPay::Error, 'Missing Store ID' unless config&.store_id
+
         res = send_request
-        "FamiPay::Response::#{self.class.name.demodulize}".constantize.new(res.body, raw: res, secret_key: config.secret_key)
+        "FamiPay::Response::#{self.class.name.demodulize}".constantize.new(res.body, raw: res,
+                                                                                     secret_key: config.secret_key)
       end
 
       private
@@ -31,7 +34,7 @@ module FamiPay
 
       def to_hash
         {
-          StoreID: config.store_id,
+          StoreID: config.store_id
         }
       end
 
@@ -45,15 +48,15 @@ module FamiPay
 
       def request_data
         CGI.escape JSON.dump({
-          Type: request_type,
-          Action: request_action,
-          TransactionData: encode_data,
-          HashDigest: hash_data,
-        })
+                               Type: request_type,
+                               Action: request_action,
+                               TransactionData: encode_data,
+                               HashDigest: hash_data
+                             })
       end
 
       def send_request
-        Faraday.post api_host, request_data, "Content-Type" => "text/plain"
+        Faraday.post api_host, request_data, 'Content-Type' => 'text/plain'
       end
 
       def encode_data
@@ -72,6 +75,13 @@ module FamiPay
         config&.api_host
       end
 
+      def branch_id
+        config&.branch_id
+      end
+
+      def branch_name
+        config&.branch_name
+      end
     end
   end
 end
